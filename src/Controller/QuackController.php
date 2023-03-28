@@ -20,7 +20,6 @@ class QuackController extends AbstractController
             'quacks' => $quackRepository->findAll(),
         ]);
     }
-
     #[Route('/new', name: 'app_quack_new', methods: ['GET', 'POST'])]
     public function new(Request $request, QuackRepository $quackRepository): Response
     {
@@ -32,7 +31,6 @@ class QuackController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $quack->setCreatedAt(new \DateTime('now'));
             $quack->setAuthor($user);
-            dd($quack);
             $quackRepository->save($quack, true);
 
 
@@ -74,7 +72,7 @@ class QuackController extends AbstractController
     #[Route('/{id}', name: 'app_quack_delete', methods: ['POST'])]
     public function delete(Request $request, Quack $quack, QuackRepository $quackRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$quack->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $quack->getId(), $request->request->get('_token'))) {
             $quackRepository->remove($quack, true);
         }
 

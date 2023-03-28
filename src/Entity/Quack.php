@@ -21,7 +21,7 @@ class Quack
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $tags = [];
+    private array $tags = ["","",""];
 
     #[ORM\ManyToOne(inversedBy: 'quacks')]
     private ?Duck $author = null;
